@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pengumpulan &amp; Batch — Sirkula Intelligence Admin</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Manajemen Pengumpulan &amp; Keterlacakan</h1>
+            <p class="page-description">
+              Penjadwalan pengangkutan wadah mesin yang penuh serta pencatatan keterlacakan batch material hingga ke mitra daur ulang.
+            </p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btn-create-pickup">
+              <i data-lucide="calendar-plus"></i>
+              <span>Jadwalkan Pengangkutan</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <section class="grid-kpi" id="collection-kpis"></section>
+
+        <!-- Pickup Priority Queue -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Antrean Prioritas Pengosongan Wadah</h2>
+              <p class="card-description">Rekomendasi pengangkutan berdasarkan ambang kapasitas wadah ≥ 65%.</p>
+            </div>
+            <span class="badge badge-warning">1 Prioritas Tinggi</span>
+          </div>
+          <div class="card-content">
+            <div class="grid-2" id="pickup-priority-grid"></div>
+          </div>
+        </section>
+
+        <!-- Batch Traceability Table -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Riwayat Batch Penyaluran Material (§6.4 Material Traceability)</h2>
+              <p class="card-description">
+                Setiap batch menghubungkan akumulasi transaksi mesin dengan penyerahan fisik ke bank sampah / mitra pengepul.
+              </p>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID Batch &amp; Jadwal</th>
+                    <th>Mesin Sumber</th>
+                    <th>Muatan PET</th>
+                    <th>Muatan Aluminium</th>
+                    <th>Mitra Penerima</th>
+                    <th>Status</th>
+                    <th class="text-right">Est. Nilai Material</th>
+                  </tr>
+                </thead>
+                <tbody id="batch-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/pages/pengumpulan.js"></script>
+</body>
+</html>

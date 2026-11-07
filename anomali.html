@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deteksi Anomali — Sirkula Intelligence Admin</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Deteksi Anomali &amp; Keamanan Transaksi</h1>
+            <p class="page-description">
+              Pemantauan percobaan manipulasi input, botol berisi cairan, benda asing, dan proteksi duplikasi pemberian reward.
+            </p>
+          </div>
+          <div class="page-actions">
+            <div class="tabs-list" id="anomaly-filter-tabs">
+              <button type="button" class="tab-trigger active" data-filter="all">Semua Kejadian</button>
+              <button type="button" class="tab-trigger" data-filter="open">Perlu Tinjauan</button>
+              <button type="button" class="tab-trigger" data-filter="resolved">Ditangani</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary KPIs -->
+        <section class="grid-kpi-3" id="anomaly-kpis"></section>
+
+        <!-- Anomaly Table -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Log Mitigasi Risiko &amp; Anti-Manipulasi (§14 Risiko Pengembangan)</h2>
+              <p class="card-description">
+                Setiap anomali ditautkan ke lapisan sensor atau protokol backend yang mencegah kebocoran saldo reward.
+              </p>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID &amp; Waktu</th>
+                    <th>Tingkat</th>
+                    <th>Jenis Anomali &amp; Rincian Kejadian</th>
+                    <th>Lapisan Proteksi</th>
+                    <th>Status</th>
+                    <th class="text-right">Tindakan</th>
+                  </tr>
+                </thead>
+                <tbody id="anomaly-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/pages/anomali.js"></script>
+</body>
+</html>

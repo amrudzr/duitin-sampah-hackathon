@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitoring Mesin — Sirkula Intelligence Admin</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Monitoring Smart RVM</h1>
+            <p class="page-description">
+              Status operasional perangkat keras ESP32, modul kamera AI, sensor berat load cell, dan kapasitas dua wadah penyimpanan terpisah.
+            </p>
+          </div>
+          <div class="page-actions">
+            <div class="tabs-list" id="machine-scope-tabs">
+              <button type="button" class="tab-trigger active" data-scope="all">Semua Unit (4)</button>
+              <button type="button" class="tab-trigger" data-scope="mvp">Hanya Prototipe MVP</button>
+              <button type="button" class="tab-trigger" data-scope="attention">Perlu Tindakan (2)</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Operational Alert -->
+        <div class="alert alert-warning" id="machine-alert-banner">
+          <i data-lucide="alert-triangle"></i>
+          <div>
+            <div class="alert-title">Peringatan Kapasitas &amp; Konektivitas Jaringan</div>
+            <div class="alert-desc">
+              Unit <strong class="mono">RVM-UNS-02</strong> (Gedung B FMIPA) mencapai kapasitas wadah PET <strong>89%</strong> dan telah dimasukkan ke jadwal pengangkutan sore ini. Unit <strong class="mono">RVM-UNS-04</strong> mengalami timeout Wi-Fi (2 transaksi ditahan berstatus <em>Menunggu Verifikasi</em>).
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary Strip -->
+        <section class="grid-kpi" id="machine-kpi-strip"></section>
+
+        <!-- Machine Cards Grid -->
+        <section class="grid-2" id="machine-cards-grid"></section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Hardware Diagnostics Sheet -->
+  <div class="sheet-backdrop" id="diag-backdrop"></div>
+  <aside class="sheet-panel" id="diag-panel" aria-hidden="true">
+    <div class="sheet-header">
+      <div>
+        <div class="row-gap-sm">
+          <h3 class="card-title mono" id="diag-id">RVM-UNS-01</h3>
+          <span id="diag-badge"></span>
+        </div>
+        <p class="card-description" id="diag-loc"></p>
+      </div>
+      <button type="button" class="btn btn-ghost btn-icon" id="btn-close-diag" aria-label="Tutup">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="sheet-body" id="diag-body"></div>
+    <div class="sheet-footer">
+      <button type="button" class="btn btn-outline btn-sm" id="btn-ping-diag">
+        <i data-lucide="refresh-cw"></i>
+        <span>Uji Koneksi API</span>
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" id="btn-close-diag-footer">Selesai</button>
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/pages/mesin.js"></script>
+</body>
+</html>

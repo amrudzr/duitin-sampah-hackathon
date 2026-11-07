@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manajemen Reward — Sirkula Intelligence Admin</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Manajemen Reward &amp; Valuasi Ekonomi</h1>
+            <p class="page-description">
+              Konfigurasi insentif saldo virtual per kategori kemasan serta simulasi keberlanjutan margin operasional.
+            </p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btn-save-rewards">
+              <i data-lucide="save"></i>
+              <span>Simpan Konfigurasi</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Reward Rules Table -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <h2 class="card-title">Aturan Nilai Reward &amp; Kriteria Fisik Material</h2>
+              <p class="card-description">
+                Ubah nominal reward ilustratif untuk menguji dampaknya terhadap margin operasional di bawah.
+              </p>
+            </div>
+            <span class="badge badge-success">Saldo Virtual Internal</span>
+          </div>
+          <div class="card-content">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Kategori Kemasan</th>
+                    <th>Tahap</th>
+                    <th>Rentang Berat Valid</th>
+                    <th>Harga Jual Mitra (/kg)</th>
+                    <th>Reward Pengguna (/unit)</th>
+                  </tr>
+                </thead>
+                <tbody id="reward-rules-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- Operational Margin Simulator (§12 Proposal) -->
+        <section class="grid-aside-main">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Parameter Simulasi Bulanan</h2>
+                <p class="card-description">Uji kelayakan ekonomi berdasarkan volume pengumpulan &amp; biaya.</p>
+              </div>
+            </div>
+            <div class="card-content stack">
+              <div class="field">
+                <label class="label" for="sim-pet-units">Target Pengumpulan Botol PET (unit/bulan)</label>
+                <input type="number" id="sim-pet-units" class="input input-sm mono" value="6000" min="0" step="100" />
+              </div>
+              <div class="field">
+                <label class="label" for="sim-alu-units">Target Pengumpulan Kaleng Aluminium (unit/bulan)</label>
+                <input type="number" id="sim-alu-units" class="input input-sm mono" value="3200" min="0" step="100" />
+              </div>
+              <div class="field">
+                <label class="label" for="sim-ops-cost">Biaya Pengumpulan &amp; Operasional Listrik/Internet (Rp)</label>
+                <input type="number" id="sim-ops-cost" class="input input-sm mono" value="350000" min="0" step="25000" />
+              </div>
+              <div class="field">
+                <label class="label" for="sim-csr-support">Dukungan Program CSR / Kemitraan Kampus (Rp)</label>
+                <input type="number" id="sim-csr-support" class="input input-sm mono" value="500000" min="0" step="50000" />
+                <span class="field-hint">Sesuai §12: potensi dukungan kemitraan brand/institusi.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Proyeksi Margin Operasional (§12 Keberlanjutan)</h2>
+                <p class="card-description">
+                  Rumus: <code>Margin = (Pendapatan Material + Dukungan Mitra) − (Total Reward + Biaya Operasional)</code>
+                </p>
+              </div>
+              <span id="margin-health-badge"></span>
+            </div>
+            <div class="card-content stack" id="margin-breakdown-box"></div>
+            <div class="card-footer">
+              <span>Perhitungan ilustratif belum termasuk depresiasi perangkat keras mesin.</span>
+              <span class="mono text-xs" id="margin-per-kg-note"></span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/pages/reward.js"></script>
+</body>
+</html>

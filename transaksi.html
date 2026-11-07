@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manajemen Transaksi — Sirkula Intelligence Admin</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="page-container">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Manajemen Transaksi</h1>
+            <p class="page-description">
+              Log audit setiap penyetoran kemasan dengan ID unik, skor klasifikasi AI, hasil sensor berat, dan status konfirmasi pemilahan.
+            </p>
+          </div>
+          <div class="page-actions demo-only">
+            <button type="button" class="btn btn-primary btn-sm" id="btn-tx-simulate">
+              <i data-lucide="plus"></i>
+              <span>Simulasi Transaksi Baru</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Architectural Guardrail Callout -->
+        <div class="alert alert-info">
+          <i data-lucide="shield-check"></i>
+          <div>
+            <div class="alert-title">Prinsip Verifikasi Sebelum Reward</div>
+            <div class="alert-desc">
+              Saldo virtual hanya ditambahkan setelah backend menerima konfirmasi aktuator pemilah (<code>ACK</code>) dengan <strong>Idempotency Key</strong> unik. Gangguan koneksi ditandai <em>Menunggu Verifikasi</em> agar tidak memicu pemberian saldo ganda atau palsu.
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Table Card -->
+        <section class="card">
+          <div class="card-header" style="padding-bottom:0.9rem;">
+            <div class="toolbar" style="width:100%;">
+              <div class="toolbar-filters">
+                <div class="input-wrap">
+                  <i data-lucide="search"></i>
+                  <input type="search" id="tx-search" class="input input-sm" placeholder="Cari ID, nama, NIM, mesin..." style="width:250px;" />
+                </div>
+
+                <select id="tx-filter-status" class="select select-sm">
+                  <option value="all">Semua Status</option>
+                  <option value="accepted">Diterima</option>
+                  <option value="rejected">Ditolak</option>
+                  <option value="pending">Menunggu Verifikasi</option>
+                </select>
+
+                <select id="tx-filter-material" class="select select-sm">
+                  <option value="all">Semua Kategori</option>
+                  <option value="PET">Botol Plastik PET</option>
+                  <option value="ALU">Kaleng Aluminium</option>
+                  <option value="UNKNOWN">Tidak Dikenali / Non-MVP</option>
+                </select>
+              </div>
+
+              <div class="text-xs text-muted" id="tx-count-label">Menampilkan 12 transaksi</div>
+            </div>
+          </div>
+
+          <div class="card-content">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID Transaksi &amp; Waktu</th>
+                    <th>Pengguna</th>
+                    <th>Unit RVM</th>
+                    <th>Klasifikasi AI</th>
+                    <th>Validasi Sensor</th>
+                    <th>Status</th>
+                    <th class="text-right">Reward Virtual</th>
+                  </tr>
+                </thead>
+                <tbody id="tx-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <span>Klik baris mana pun untuk membuka rincian 5 tahap verifikasi.</span>
+            <div class="row-gap-sm">
+              <button type="button" class="btn btn-outline btn-sm" disabled>Sebelumnya</button>
+              <span class="text-xs mono" style="padding:0 0.4rem;">Halaman 1 / 1</span>
+              <button type="button" class="btn btn-outline btn-sm" disabled>Berikutnya</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Detail Sheet -->
+  <div class="sheet-backdrop" id="detail-backdrop"></div>
+  <aside class="sheet-panel" id="detail-panel" aria-hidden="true">
+    <div class="sheet-header">
+      <div>
+        <div class="row-gap-sm">
+          <h3 class="card-title mono" id="detail-id">TX-SRK</h3>
+          <span id="detail-status-badge"></span>
+        </div>
+        <p class="card-description" id="detail-subtitle"></p>
+      </div>
+      <button type="button" class="btn btn-ghost btn-icon" id="btn-close-detail" aria-label="Tutup">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="sheet-body" id="detail-body"></div>
+    <div class="sheet-footer" id="detail-footer"></div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/pages/transaksi.js"></script>
+</body>
+</html>

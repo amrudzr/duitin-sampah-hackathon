@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ringkasan — Sirkula Intelligence Admin</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar" id="app-sidebar"></aside>
+
+    <div class="app-main">
+      <header class="app-topbar" id="app-topbar"></header>
+
+      <main class="page-container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Ringkasan Operasional</h1>
+            <p class="page-description">
+              Pemantauan aktivitas penerimaan kemasan, validasi multi-modal (AI + sensor), dan distribusi saldo reward virtual di klaster kampus UNS.
+            </p>
+          </div>
+          <div class="page-actions demo-only">
+            <button type="button" class="btn btn-outline btn-sm" id="btn-reset-demo" title="Kembalikan data ke kondisi awal">
+              <i data-lucide="rotate-ccw"></i>
+              <span>Reset Simulasi</span>
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="btn-simulate-tx">
+              <i data-lucide="sparkles"></i>
+              <span>Simulasi Transaksi Masuk</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <section class="grid-kpi" id="kpi-container"></section>
+
+        <!-- Row 2: 14-Day Trend + Material Split -->
+        <section class="grid-main-aside">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Tren Pengumpulan Kemasan (14 Hari Terakhir)</h2>
+                <p class="card-description">Perbandingan penerimaan harian Botol Plastik PET dan Kaleng Aluminium yang lolos verifikasi.</p>
+              </div>
+              <div class="tabs-list" id="trend-mode-tabs">
+                <button type="button" class="tab-trigger active" data-mode="unit">Unit Kemasan</button>
+                <button type="button" class="tab-trigger" data-mode="kg">Berat (kg)</button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="chart-box">
+                <canvas id="chart-daily-trend"></canvas>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="row-gap">
+                <span class="row-gap-sm text-xs"><span class="legend-dot pet"></span> Botol PET (Rp100/unit)</span>
+                <span class="row-gap-sm text-xs"><span class="legend-dot alu"></span> Kaleng Aluminium (Rp300/unit)</span>
+              </div>
+              <span class="text-xs">Rata-rata waktu verifikasi: <strong class="mono">1,9 dtk/unit</strong></span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Proporsi Material Terpilah</h2>
+                <p class="card-description">Akumulasi material berdasarkan kategori penerimaan MVP Tahap 1.</p>
+              </div>
+              <span class="badge badge-outline">2 Kategori</span>
+            </div>
+            <div class="card-content">
+              <div class="chart-box-sm" style="height:190px;">
+                <canvas id="chart-material-split"></canvas>
+              </div>
+              <div class="kv-list" style="margin-top:0.9rem;" id="material-split-summary"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Row 3: Recent Transactions + Machine Quick Status -->
+        <section class="grid-main-aside">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Aktivitas Transaksi &amp; Verifikasi Terbaru</h2>
+                <p class="card-description">Klik baris transaksi untuk melihat rincian alur pemeriksaan kamera AI, sensor berat, dan aktuator pemilah.</p>
+              </div>
+              <a href="transaksi.html" class="btn btn-outline btn-sm">
+                <span>Semua Transaksi</span>
+                <i data-lucide="arrow-up-right"></i>
+              </a>
+            </div>
+            <div class="card-content">
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID Transaksi</th>
+                      <th>Pengguna</th>
+                      <th>Material &amp; Mesin</th>
+                      <th>AI &amp; Berat</th>
+                      <th>Status</th>
+                      <th class="text-right">Reward</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-tx-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Status Unit Smart RVM</h2>
+                <p class="card-description">Kapasitas wadah penyimpanan terpisah &amp; konektivitas mesin.</p>
+              </div>
+              <a href="mesin.html" class="btn btn-outline btn-sm">Detail</a>
+            </div>
+            <div class="card-content stack" id="machine-quick-list" style="gap:0.85rem;"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Slide-over Sheet for Transaction Verification Detail -->
+  <div class="sheet-backdrop" id="tx-sheet-backdrop"></div>
+  <aside class="sheet-panel" id="tx-sheet-panel" aria-hidden="true">
+    <div class="sheet-header">
+      <div>
+        <div class="row-gap-sm">
+          <h3 class="card-title mono" id="sheet-tx-id">TX-SRK</h3>
+          <span id="sheet-tx-badge"></span>
+        </div>
+        <p class="card-description" id="sheet-tx-time"></p>
+      </div>
+      <button type="button" class="btn btn-ghost btn-icon" id="btn-close-sheet" aria-label="Tutup panel">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+    <div class="sheet-body" id="sheet-tx-body"></div>
+    <div class="sheet-footer">
+      <a href="transaksi.html" class="btn btn-outline btn-sm">Buka Manajemen Transaksi</a>
+      <button type="button" class="btn btn-primary btn-sm" id="btn-close-sheet-footer">Tutup</button>
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/layout.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/pages/dashboard.js"></script>
+</body>
+</html>

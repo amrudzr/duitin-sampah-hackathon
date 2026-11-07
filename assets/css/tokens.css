@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Sirkula Intelligence — Design Tokens (shadcn/ui Zinc + Emerald Reference)
+   ========================================================================== */
+
+:root {
+  /* Base neutral palette (Zinc) */
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+
+  /* Sirkula Emerald Primary */
+  --primary: 142.1 76.2% 36.3%;
+  --primary-hover: 142.1 76.2% 31%;
+  --primary-foreground: 355.7 100% 97.3%;
+  --primary-soft: 141 84% 95%;
+
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 45%;
+
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-soft: 0 86% 97%;
+
+  --warning: 38 92% 50%;
+  --warning-foreground: 26 83% 14%;
+  --warning-soft: 48 96% 95%;
+
+  --info: 199 89% 48%;
+  --info-soft: 204 94% 95%;
+
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 142.1 76.2% 36.3%;
+
+  /* Sidebar tokens (shadcn sidebar-07) */
+  --sidebar-bg: 240 4.8% 98.2%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-accent: 240 4.8% 93.8%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+
+  /* Material & Chart colors */
+  --chart-pet: 199 89% 46%;       /* Sky/Cyan for PET Plastic */
+  --chart-alu: 142 71% 40%;       /* Emerald for Aluminium */
+  --chart-reject: 0 72% 56%;      /* Rose for Rejected */
+  --chart-pending: 38 92% 50%;    /* Amber for Pending */
+
+  /* Radii & Sizing */
+  --radius-sm: 0.375rem;
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --sidebar-width: 260px;
+  --header-height: 56px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 12px 24px -4px rgb(0 0 0 / 0.12), 0 4px 8px -2px rgb(0 0 0 / 0.06);
+
+  /* Typography */
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+
+  --card: 240 10% 5.5%;
+  --card-foreground: 0 0% 98%;
+
+  --popover: 240 10% 5.5%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 142.1 70.6% 45.3%;
+  --primary-hover: 142.1 70.6% 50%;
+  --primary-foreground: 144.9 80.4% 10%;
+  --primary-soft: 143 60% 13%;
+
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+
+  --muted: 240 3.7% 14.5%;
+  --muted-foreground: 240 5% 64.9%;
+
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+
+  --destructive: 0 72% 55%;
+  --destructive-foreground: 0 0% 98%;
+  --destructive-soft: 0 50% 14%;
+
+  --warning: 38 92% 55%;
+  --warning-foreground: 48 96% 89%;
+  --warning-soft: 36 55% 14%;
+
+  --info: 199 89% 55%;
+  --info-soft: 201 60% 14%;
+
+  --border: 240 3.7% 16.5%;
+  --input: 240 3.7% 16.5%;
+  --ring: 142.4 71.8% 39.2%;
+
+  --sidebar-bg: 240 6% 6%;
+  --sidebar-foreground: 240 4.8% 85.9%;
+  --sidebar-primary: 0 0% 98%;
+  --sidebar-accent: 240 3.7% 13.5%;
+  --sidebar-accent-foreground: 240 4.8% 95.9%;
+  --sidebar-border: 240 3.7% 14.5%;
+
+  --chart-pet: 199 89% 56%;
+  --chart-alu: 142 70% 48%;
+  --chart-reject: 0 78% 62%;
+  --chart-pending: 38 92% 56%;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.25);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.35);
+  --shadow-md: 0 6px 12px -2px rgb(0 0 0 / 0.45);
+  --shadow-lg: 0 16px 32px -4px rgb(0 0 0 / 0.6);
+}

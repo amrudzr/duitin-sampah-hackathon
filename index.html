@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masuk Admin — Sirkula Intelligence</title>
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+  <style>
+    .login-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.08fr 1fr;
+    }
+    .login-showcase {
+      background-color: hsl(var(--sidebar-bg));
+      border-right: 1px solid hsl(var(--border));
+      padding: 2.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .login-showcase::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(hsl(var(--border)) 1px, transparent 1px);
+      background-size: 20px 20px;
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .showcase-top, .showcase-mid, .showcase-bottom {
+      position: relative;
+      z-index: 1;
+    }
+    .showcase-headline {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      max-width: 500px;
+      margin-top: 1rem;
+    }
+    .showcase-lead {
+      margin-top: 0.75rem;
+      font-size: 0.925rem;
+      color: hsl(var(--muted-foreground));
+      max-width: 480px;
+      line-height: 1.6;
+    }
+    .pillar-grid {
+      margin-top: 1.75rem;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+      max-width: 520px;
+    }
+    .pillar-item {
+      padding: 0.85rem 0.95rem;
+      border-radius: var(--radius);
+      background-color: hsl(var(--card));
+      border: 1px solid hsl(var(--border));
+      box-shadow: var(--shadow-xs);
+    }
+    .pillar-title {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .pillar-title svg {
+      width: 14px;
+      height: 14px;
+      color: hsl(var(--primary));
+    }
+    .pillar-desc {
+      font-size: 0.74rem;
+      color: hsl(var(--muted-foreground));
+      margin-top: 0.25rem;
+      line-height: 1.45;
+    }
+    .login-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+    }
+    .login-topbar {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 390px;
+    }
+    @media (max-width: 920px) {
+      .login-shell {
+        grid-template-columns: 1fr;
+      }
+      .login-showcase {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-shell">
+    <!-- Left Column: Product Thesis & Material Intelligence -->
+    <aside class="login-showcase">
+      <div class="showcase-top row-between">
+        <div class="row-gap-sm">
+          <img src="assets/img/logo.svg" alt="Sirkula Intelligence" class="brand-logo" style="width:34px;height:34px;" />
+          <div>
+            <div class="brand-name" style="font-size:1rem;">Sirkula Intelligence</div>
+            <div class="brand-sub">Smart Beverage Container Recovery Ecosystem</div>
+          </div>
+        </div>
+        <span class="badge badge-success">UNS Innovation Hackathon 2026</span>
+      </div>
+
+      <div class="showcase-mid">
+        <span class="badge badge-outline">Material Intelligence Platform</span>
+        <h1 class="showcase-headline">
+          Mengubah kemasan minuman bekas menjadi material ekonomi yang terlacak.
+        </h1>
+        <p class="showcase-lead">
+          Panel kendali terpadu untuk memantau unit Smart Reverse Vending Machine (RVM), memverifikasi penerimaan botol PET &amp; kaleng aluminium berbasis AI + sensor fisik, serta mengelola keterlacakan penyaluran material.
+        </p>
+
+        <div class="pillar-grid">
+          <div class="pillar-item">
+            <div class="pillar-title"><i data-lucide="scan-eye"></i> Multi-Modal Verification</div>
+            <div class="pillar-desc">Klasifikasi computer vision dipadukan pemeriksaan berat load cell &amp; sensor objek.</div>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-title"><i data-lucide="shield-check"></i> Konfirmasi Anti-Ganda</div>
+            <div class="pillar-desc">Saldo virtual hanya cair setelah aktuator pemilah mengonfirmasi ID transaksi unik.</div>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-title"><i data-lucide="coins"></i> Valuasi Terukur</div>
+            <div class="pillar-desc">Aturan insentif PET &amp; Aluminium yang diselaraskan terhadap margin operasional.</div>
+          </div>
+          <div class="pillar-item">
+            <div class="pillar-title"><i data-lucide="route"></i> Keterlacakan Batch</div>
+            <div class="pillar-desc">Pencatatan digital dari mesin kampus hingga penyaluran ke mitra daur ulang.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="showcase-bottom row-between text-xs text-muted">
+        <span>Fokus Prototipe MVP: Botol Plastik PET &amp; Kaleng Aluminium</span>
+        <span class="mono">v0.9-prototype</span>
+      </div>
+    </aside>
+
+    <!-- Right Column: Admin Sign-In Form -->
+    <main class="login-panel">
+      <div class="login-topbar">
+        <button type="button" class="btn btn-outline btn-icon" id="login-theme-btn" title="Ganti tema Terang / Gelap">
+          <i data-lucide="moon"></i>
+        </button>
+      </div>
+
+      <div class="card login-card">
+        <div class="card-header" style="padding-bottom:0.5rem;">
+          <div>
+            <h2 class="card-title" style="font-size:1.25rem;">Masuk ke Panel Pengelola</h2>
+            <p class="card-description">Gunakan akun operator Sirkula untuk mengakses dashboard pemantauan mesin dan transaksi.</p>
+          </div>
+        </div>
+
+        <div class="card-content pt">
+          <form id="login-form" class="stack">
+            <div class="field">
+              <label class="label" for="email">Email Operator</label>
+              <input class="input" id="email" type="email" value="admin@sirkula.id" required />
+            </div>
+
+            <div class="field">
+              <div class="row-between">
+                <label class="label" for="password">Kata Sandi</label>
+                <span class="text-xs text-muted">Sesi Prototipe</span>
+              </div>
+              <input class="input" id="password" type="password" value="sirkula2026" required />
+            </div>
+
+            <div class="field">
+              <label class="label" for="zone">Wilayah Operasional</label>
+              <select class="select" id="zone">
+                <option value="uns">Klaster Kampus UNS Kentingan (MVP)</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;margin-top:0.25rem;">
+              <span>Masuk ke Dashboard</span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          </form>
+        </div>
+
+        <div class="card-footer" style="justify-content:center;text-align:center;">
+          <span>Prototipe antarmuka untuk dokumentasi proposal — tanpa autentikasi eksternal.</span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/pages/login.js"></script>
+</body>
+</html>
