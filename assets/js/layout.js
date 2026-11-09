@@ -8,13 +8,13 @@
       label: 'Operasional Utama',
       items: [
         { id: 'dashboard', title: 'Ringkasan', href: 'dashboard.html', icon: 'layout-dashboard' },
-        { id: 'mesin', title: 'Monitoring Mesin', href: 'mesin.html', icon: 'cpu', badge: '4 Unit' },
+        { id: 'mesin', title: 'Monitoring Mesin', href: 'mesin.html', icon: 'cpu', machineCount: true },
         { id: 'transaksi', title: 'Manajemen Transaksi', href: 'transaksi.html', icon: 'arrow-left-right' },
         { id: 'analitik', title: 'Analitik Material', href: 'analitik.html', icon: 'bar-chart-3' }
       ]
     },
     {
-      label: ' Tata Kelola & Keterlacakan',
+      label: 'Tata Kelola & Keterlacakan',
       items: [
         { id: 'reward', title: 'Manajemen Reward', href: 'reward.html', icon: 'coins' },
         { id: 'pengumpulan', title: 'Pengumpulan & Batch', href: 'pengumpulan.html', icon: 'truck' },
@@ -44,6 +44,8 @@
 
     const anomalies = window.SirkulaData ? window.SirkulaData.getAnomalies() : [];
     const openAnomalies = anomalies.filter(a => a.actionStatus === 'Dibuka').length;
+    const machines = window.SirkulaData ? window.SirkulaData.MACHINES : [];
+    const onlineMachines = machines.filter(m => m.status !== 'offline').length || 3;
 
     const sidebarEl = document.getElementById('app-sidebar');
     if (sidebarEl) {
@@ -66,6 +68,8 @@
                   let rightBadge = '';
                   if (item.alertCount && openAnomalies > 0) {
                     rightBadge = `<span class="nav-count nav-count-danger">${openAnomalies}</span>`;
+                  } else if (item.machineCount) {
+                    rightBadge = `<span class="nav-count nav-count-success">${onlineMachines}</span>`;
                   } else if (item.badge) {
                     rightBadge = `<span class="nav-count">${item.badge}</span>`;
                   }
@@ -84,18 +88,6 @@
               </ul>
             </div>
           `).join('')}
-
-          <div style="margin-top:auto;">
-            <div class="sidebar-mvp-box">
-              <div class="sidebar-mvp-title">
-                <span>Cakupan MVP Aktif</span>
-                <span class="badge badge-success" style="font-size:0.65rem;padding:0.05rem 0.4rem;">Tahap 1</span>
-              </div>
-              <div class="sidebar-mvp-desc">
-                Fokus validasi <strong>Botol PET</strong> &amp; <strong>Kaleng Aluminium</strong> dengan saldo reward virtual terverifikasi sensor.
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="sidebar-footer">
@@ -130,15 +122,10 @@
         </div>
 
         <div class="topbar-right">
-          <span class="badge badge-outline demo-only" title="Angka pada prototipe ini bersifat ilustratif untuk keperluan proposal UNS Innovation Hackathon 2026">
+          <span class="badge badge-outline" title="Prototipe UNS Innovation Hackathon 2026">
             <span class="badge-dot" style="color:hsl(var(--primary));"></span>
             Data Ilustrasi Prototipe
           </span>
-
-          <button type="button" class="btn btn-outline btn-sm" id="btn-clean-mode" title="Sembunyikan/tampilkan penanda simulasi saat mengambil screenshot proposal">
-            <i data-lucide="${isClean ? 'eye' : 'camera'}"></i>
-            <span>${isClean ? 'Mode Standar' : 'Mode Screenshot'}</span>
-          </button>
 
           <button type="button" class="btn btn-outline btn-icon" id="btn-theme-toggle" title="Ganti tema Terang / Gelap" aria-label="Ganti tema">
             <i data-lucide="${isDark ? 'sun' : 'moon'}"></i>
@@ -181,26 +168,6 @@
         themeBtn.innerHTML = `<i data-lucide="${nextDark ? 'sun' : 'moon'}"></i>`;
         refreshIcons();
         window.dispatchEvent(new CustomEvent('sirkula:themechange', { detail: { dark: nextDark } }));
-      });
-    }
-
-    const cleanBtn = document.getElementById('btn-clean-mode');
-    if (cleanBtn) {
-      cleanBtn.addEventListener('click', () => {
-        const nextClean = !document.body.classList.contains('clean-mode');
-        document.body.classList.toggle('clean-mode', nextClean);
-        localStorage.setItem('sirkula_clean_mode', nextClean ? '1' : '0');
-        cleanBtn.innerHTML = `
-          <i data-lucide="${nextClean ? 'eye' : 'camera'}"></i>
-          <span>${nextClean ? 'Mode Standar' : 'Mode Screenshot'}</span>
-        `;
-        refreshIcons();
-        showToast(
-          nextClean ? 'Mode Screenshot Aktif' : 'Mode Standar Aktif',
-          nextClean
-            ? 'Label dan tombol bantu simulasi disembunyikan agar bersih saat di-screenshot.'
-            : 'Elemen bantu simulasi kembali ditampilkan.'
-        );
       });
     }
   }

@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="assets/css/tokens.css" />
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/components.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="assets/css/map.css" />
 </head>
 <body>
   <div class="app-shell">
@@ -20,43 +22,63 @@
       <header class="app-topbar" id="app-topbar"></header>
 
       <main class="page-container">
+        <!-- Page Header -->
         <div class="page-header">
           <div>
-            <h1 class="page-title">Monitoring Smart RVM</h1>
+            <h1 class="page-title">Monitoring Mesin</h1>
             <p class="page-description">
-              Status operasional perangkat keras ESP32, modul kamera AI, sensor berat load cell, dan kapasitas dua wadah penyimpanan terpisah.
+              Status operasional unit RVM, kapasitas wadah terpilah, dan sebaran jaringan IoT Kampus UNS.
             </p>
           </div>
           <div class="page-actions">
+            <!-- View Mode Switch: Grid vs Map -->
+            <div class="tabs-list" id="machine-view-tabs">
+              <button type="button" class="tab-trigger active" data-view="map">Peta Sebaran</button>
+              <button type="button" class="tab-trigger" data-view="grid">Kartu Unit</button>
+            </div>
+
+            <!-- Scope Filter Tabs -->
             <div class="tabs-list" id="machine-scope-tabs">
-              <button type="button" class="tab-trigger active" data-scope="all">Semua Unit (4)</button>
-              <button type="button" class="tab-trigger" data-scope="mvp">Hanya Prototipe MVP</button>
-              <button type="button" class="tab-trigger" data-scope="attention">Perlu Tindakan (2)</button>
+              <button type="button" class="tab-trigger active" data-scope="all">Semua (4)</button>
+              <button type="button" class="tab-trigger" data-scope="attention">Perhatian (2)</button>
             </div>
           </div>
         </div>
 
-        <!-- Operational Alert -->
-        <div class="alert alert-warning" id="machine-alert-banner">
-          <i data-lucide="alert-triangle"></i>
-          <div>
-            <div class="alert-title">Peringatan Kapasitas &amp; Konektivitas Jaringan</div>
-            <div class="alert-desc">
-              Unit <strong class="mono">RVM-UNS-02</strong> (Gedung B FMIPA) mencapai kapasitas wadah PET <strong>89%</strong> dan telah dimasukkan ke jadwal pengangkutan sore ini. Unit <strong class="mono">RVM-UNS-04</strong> mengalami timeout Wi-Fi (2 transaksi ditahan berstatus <em>Menunggu Verifikasi</em>).
-            </div>
+        <!-- Clean Operational Alert -->
+        <div class="alert alert-warning" id="machine-alert-banner" style="padding:0.6rem 0.85rem;margin-bottom:1.25rem;">
+          <div class="text-xs">
+            <strong>RVM-UNS-02</strong> kapasitas PET 89% (jadwal angkut sore) · <strong>RVM-UNS-04</strong> sinyal Wi-Fi terputus.
           </div>
         </div>
 
-        <!-- Summary Strip -->
+        <!-- Summary Strip (4 Clean KPIs) -->
         <section class="grid-kpi" id="machine-kpi-strip"></section>
 
-        <!-- Machine Cards Grid -->
-        <section class="grid-2" id="machine-cards-grid"></section>
+        <!-- View 1: Machine Cards Grid (Hidden by default) -->
+        <section class="grid-2" id="machine-cards-grid" style="display:none;"></section>
+
+        <!-- View 2: Integrated Interactive Map (Default active view) -->
+        <section id="machine-map-section" style="margin-top:0.5rem;">
+          <div class="map-card-wrapper">
+            <div class="map-toolbar-floating">
+              <button type="button" class="btn btn-outline btn-sm active" id="btn-toggle-topology">Topologi Jaringan</button>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-focus-uns">Fokus UNS</button>
+            </div>
+            <div id="machine-map-canvas" class="map-container" style="height:520px;"></div>
+            <div class="map-legend-floating">
+              <div class="map-legend-item"><span class="badge-dot" style="color:hsl(var(--foreground));"></span> Pusat Server</div>
+              <div class="map-legend-item"><span class="badge-dot" style="color:hsl(var(--primary));"></span> Online</div>
+              <div class="map-legend-item"><span class="badge-dot" style="color:hsl(var(--warning));"></span> Hampir Penuh</div>
+              <div class="map-legend-item"><span class="badge-dot" style="color:hsl(var(--destructive));"></span> Offline</div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   </div>
 
-  <!-- Hardware Diagnostics Sheet -->
+  <!-- Hardware Diagnostics Sheet (Progressive Disclosure) -->
   <div class="sheet-backdrop" id="diag-backdrop"></div>
   <aside class="sheet-panel" id="diag-panel" aria-hidden="true">
     <div class="sheet-header">
@@ -73,17 +95,16 @@
     </div>
     <div class="sheet-body" id="diag-body"></div>
     <div class="sheet-footer">
-      <button type="button" class="btn btn-outline btn-sm" id="btn-ping-diag">
-        <i data-lucide="refresh-cw"></i>
-        <span>Uji Koneksi API</span>
-      </button>
+      <button type="button" class="btn btn-outline btn-sm" id="btn-ping-diag">Uji Koneksi API</button>
       <button type="button" class="btn btn-primary btn-sm" id="btn-close-diag-footer">Selesai</button>
     </div>
   </aside>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="assets/js/data.js"></script>
   <script src="assets/js/layout.js"></script>
+  <script src="assets/js/pages/peta.js"></script>
   <script src="assets/js/pages/mesin.js"></script>
 </body>
 </html>

@@ -41,10 +41,9 @@
             <div>
               <h2 class="card-title">Aturan Nilai Reward &amp; Kriteria Fisik Material</h2>
               <p class="card-description">
-                Ubah nominal reward ilustratif untuk menguji dampaknya terhadap margin operasional di bawah.
+                Nominal reward ilustratif per kategori kemasan.
               </p>
             </div>
-            <span class="badge badge-success">Saldo Virtual Internal</span>
           </div>
           <div class="card-content">
             <div class="table-wrap">
@@ -53,7 +52,6 @@
                   <tr>
                     <th>Status</th>
                     <th>Kategori Kemasan</th>
-                    <th>Tahap</th>
                     <th>Rentang Berat Valid</th>
                     <th>Harga Jual Mitra (/kg)</th>
                     <th>Reward Pengguna (/unit)</th>
@@ -65,13 +63,13 @@
           </div>
         </section>
 
-        <!-- Operational Margin Simulator (§12 Proposal) -->
+        <!-- Operational Margin Simulator -->
         <section class="grid-aside-main">
           <div class="card">
             <div class="card-header">
               <div>
                 <h2 class="card-title">Parameter Simulasi Bulanan</h2>
-                <p class="card-description">Uji kelayakan ekonomi berdasarkan volume pengumpulan &amp; biaya.</p>
+                <p class="card-description">Uji kelayakan ekonomi per volume kemasan.</p>
               </div>
             </div>
             <div class="card-content stack">
@@ -84,13 +82,12 @@
                 <input type="number" id="sim-alu-units" class="input input-sm mono" value="3200" min="0" step="100" />
               </div>
               <div class="field">
-                <label class="label" for="sim-ops-cost">Biaya Pengumpulan &amp; Operasional Listrik/Internet (Rp)</label>
+                <label class="label" for="sim-ops-cost">Biaya Operasional &amp; Listrik (Rp)</label>
                 <input type="number" id="sim-ops-cost" class="input input-sm mono" value="350000" min="0" step="25000" />
               </div>
               <div class="field">
-                <label class="label" for="sim-csr-support">Dukungan Program CSR / Kemitraan Kampus (Rp)</label>
+                <label class="label" for="sim-csr-support">Dukungan Program CSR / Mitra (Rp)</label>
                 <input type="number" id="sim-csr-support" class="input input-sm mono" value="500000" min="0" step="50000" />
-                <span class="field-hint">Sesuai §12: potensi dukungan kemitraan brand/institusi.</span>
               </div>
             </div>
           </div>
@@ -98,16 +95,16 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Proyeksi Margin Operasional (§12 Keberlanjutan)</h2>
+                <h2 class="card-title">Proyeksi Margin Operasional</h2>
                 <p class="card-description">
-                  Rumus: <code>Margin = (Pendapatan Material + Dukungan Mitra) − (Total Reward + Biaya Operasional)</code>
+                  Estimasi surplus dari penjualan material &amp; reward pengguna.
                 </p>
               </div>
               <span id="margin-health-badge"></span>
             </div>
             <div class="card-content stack" id="margin-breakdown-box"></div>
             <div class="card-footer">
-              <span>Perhitungan ilustratif belum termasuk depresiasi perangkat keras mesin.</span>
+              <span class="text-xs text-muted">Perhitungan ilustratif margin operasional berkala.</span>
               <span class="mono text-xs" id="margin-per-kg-note"></span>
             </div>
           </div>

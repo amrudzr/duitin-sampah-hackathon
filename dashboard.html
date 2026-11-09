@@ -25,17 +25,17 @@
           <div>
             <h1 class="page-title">Ringkasan Operasional</h1>
             <p class="page-description">
-              Pemantauan aktivitas penerimaan kemasan, validasi multi-modal (AI + sensor), dan distribusi saldo reward virtual di klaster kampus UNS.
+              Metrik agregat pengumpulan material dan kinerja validasi sensor RVM di Kampus UNS.
             </p>
           </div>
           <div class="page-actions demo-only">
             <button type="button" class="btn btn-outline btn-sm" id="btn-reset-demo" title="Kembalikan data ke kondisi awal">
               <i data-lucide="rotate-ccw"></i>
-              <span>Reset Simulasi</span>
+              <span>Reset</span>
             </button>
             <button type="button" class="btn btn-primary btn-sm" id="btn-simulate-tx">
               <i data-lucide="sparkles"></i>
-              <span>Simulasi Transaksi Masuk</span>
+              <span>Simulasi Transaksi</span>
             </button>
           </div>
         </div>
@@ -48,11 +48,11 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Tren Pengumpulan Kemasan (14 Hari Terakhir)</h2>
-                <p class="card-description">Perbandingan penerimaan harian Botol Plastik PET dan Kaleng Aluminium yang lolos verifikasi.</p>
+                <h2 class="card-title">Tren Pengumpulan (14 Hari)</h2>
+                <p class="card-description">Penerimaan harian kemasan PET dan Aluminium.</p>
               </div>
               <div class="tabs-list" id="trend-mode-tabs">
-                <button type="button" class="tab-trigger active" data-mode="unit">Unit Kemasan</button>
+                <button type="button" class="tab-trigger active" data-mode="unit">Unit</button>
                 <button type="button" class="tab-trigger" data-mode="kg">Berat (kg)</button>
               </div>
             </div>
@@ -63,20 +63,18 @@
             </div>
             <div class="card-footer">
               <div class="row-gap">
-                <span class="row-gap-sm text-xs"><span class="legend-dot pet"></span> Botol PET (Rp100/unit)</span>
-                <span class="row-gap-sm text-xs"><span class="legend-dot alu"></span> Kaleng Aluminium (Rp300/unit)</span>
+                <span class="row-gap-sm text-xs"><span class="legend-dot pet"></span> PET (Rp100/unit)</span>
+                <span class="row-gap-sm text-xs"><span class="legend-dot alu"></span> Aluminium (Rp300/unit)</span>
               </div>
-              <span class="text-xs">Rata-rata waktu verifikasi: <strong class="mono">1,9 dtk/unit</strong></span>
             </div>
           </div>
 
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Proporsi Material Terpilah</h2>
-                <p class="card-description">Akumulasi material berdasarkan kategori penerimaan MVP Tahap 1.</p>
+                <h2 class="card-title">Proporsi Material</h2>
+                <p class="card-description">Komposisi material terpilah.</p>
               </div>
-              <span class="badge badge-outline">2 Kategori</span>
             </div>
             <div class="card-content">
               <div class="chart-box-sm" style="height:190px;">
@@ -92,8 +90,8 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Aktivitas Transaksi &amp; Verifikasi Terbaru</h2>
-                <p class="card-description">Klik baris transaksi untuk melihat rincian alur pemeriksaan kamera AI, sensor berat, dan aktuator pemilah.</p>
+                <h2 class="card-title">Aktivitas Transaksi Terbaru</h2>
+                <p class="card-description">Log penyetoran kemasan dan hasil verifikasi multi-modal.</p>
               </div>
               <a href="transaksi.html" class="btn btn-outline btn-sm">
                 <span>Semua Transaksi</span>
@@ -105,10 +103,10 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>ID Transaksi</th>
+                      <th>ID &amp; Waktu</th>
                       <th>Pengguna</th>
-                      <th>Material &amp; Mesin</th>
-                      <th>AI &amp; Berat</th>
+                      <th>Mesin</th>
+                      <th>Material</th>
                       <th>Status</th>
                       <th class="text-right">Reward</th>
                     </tr>
@@ -122,8 +120,8 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Status Unit Smart RVM</h2>
-                <p class="card-description">Kapasitas wadah penyimpanan terpisah &amp; konektivitas mesin.</p>
+                <h2 class="card-title">Status Unit RVM</h2>
+                <p class="card-description">Kapasitas wadah &amp; jaringan mesin.</p>
               </div>
               <a href="mesin.html" class="btn btn-outline btn-sm">Detail</a>
             </div>

@@ -10,24 +10,24 @@
 
     document.getElementById('collection-kpis').innerHTML = `
       <div class="card kpi-card">
-        <div class="kpi-top"><span class="kpi-label">Unit Perlu Pengangkutan</span><span class="kpi-icon"><i data-lucide="alert-circle"></i></span></div>
+        <div class="kpi-top"><span class="kpi-label">Perlu Pengosongan</span><span class="kpi-icon"><i data-lucide="alert-circle"></i></span></div>
         <div class="kpi-value">1 <span class="text-muted" style="font-size:0.9rem;font-weight:500;">mesin</span></div>
-        <div class="kpi-sub"><span class="trend-warn">RVM-UNS-02</span><span>(Wadah PET 89% penuh)</span></div>
+        <div class="kpi-sub"><span class="trend-warn">RVM-UNS-02</span><span>(PET 89%)</span></div>
       </div>
       <div class="card kpi-card">
-        <div class="kpi-top"><span class="kpi-label">Batch Tercatat Bulan Ini</span><span class="kpi-icon"><i data-lucide="boxes"></i></span></div>
+        <div class="kpi-top"><span class="kpi-label">Batch Tersalurkan</span><span class="kpi-icon"><i data-lucide="boxes"></i></span></div>
         <div class="kpi-value">${batches.length} <span class="text-muted" style="font-size:0.9rem;font-weight:500;">batch</span></div>
-        <div class="kpi-sub"><span>100% memiliki ID keterlacakan unik</span></div>
+        <div class="kpi-sub"><span>Keterlacakan aktif</span></div>
       </div>
       <div class="card kpi-card">
-        <div class="kpi-top"><span class="kpi-label">Massa Batch Tersalurkan</span><span class="kpi-icon"><i data-lucide="scale"></i></span></div>
+        <div class="kpi-top"><span class="kpi-label">Total Massa Batch</span><span class="kpi-icon"><i data-lucide="scale"></i></span></div>
         <div class="kpi-value">${formatKg(totalBatchKg)}</div>
-        <div class="kpi-sub"><span>Terpilah bersih sejak dari mesin</span></div>
+        <div class="kpi-sub"><span>Material terpilah bersih</span></div>
       </div>
       <div class="card kpi-card">
-        <div class="kpi-top"><span class="kpi-label">Estimasi Nilai Penyaluran</span><span class="kpi-icon"><i data-lucide="banknote"></i></span></div>
+        <div class="kpi-top"><span class="kpi-label">Nilai Penyaluran</span><span class="kpi-icon"><i data-lucide="banknote"></i></span></div>
         <div class="kpi-value">${formatRupiah(totalBatchVal)}</div>
-        <div class="kpi-sub"><span>Mitra: Bank Sampah &amp; Pengepul Lokal</span></div>
+        <div class="kpi-sub"><span>Mitra daur ulang</span></div>
       </div>
     `;
   }

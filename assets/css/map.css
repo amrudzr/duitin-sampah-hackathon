@@ -1,0 +1,409 @@
+/* ==========================================================================
+   Sirkula Intelligence — Interactive Gimmick Map & Network Styles
+   Strict shadcn/ui Zinc + Emerald Aesthetic
+   ========================================================================== */
+
+.map-card-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+  overflow: hidden;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-container {
+  width: 100%;
+  height: 520px;
+  background-color: hsl(var(--muted));
+  outline: none;
+  z-index: 1;
+}
+
+/* On full page peta.html */
+.map-full-height {
+  height: calc(100vh - 190px);
+  min-height: 480px;
+}
+
+/* Dark mode tile adjustment */
+.dark .leaflet-tile-pane {
+  filter: brightness(0.9) contrast(1.1);
+}
+
+/* --- Leaflet Component Resets for shadcn/ui --- */
+.leaflet-bar {
+  border: 1px solid hsl(var(--border)) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: var(--radius) !important;
+  overflow: hidden;
+}
+
+.leaflet-bar a {
+  background-color: hsl(var(--card)) !important;
+  color: hsl(var(--card-foreground)) !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.leaflet-bar a:hover {
+  background-color: hsl(var(--muted)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.leaflet-bar a:last-child {
+  border-bottom: none !important;
+}
+
+.leaflet-control-attribution {
+  background: hsl(var(--card) / 0.85) !important;
+  backdrop-filter: blur(4px);
+  color: hsl(var(--muted-foreground)) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 0.6875rem !important;
+  border-top-left-radius: var(--radius-sm);
+  padding: 2px 8px !important;
+  border: 1px solid hsl(var(--border));
+  border-right: none;
+  border-bottom: none;
+}
+
+.leaflet-control-attribution a {
+  color: hsl(var(--foreground)) !important;
+}
+
+/* --- Custom Leaflet Popup (shadcn/ui Popover) --- */
+.leaflet-popup-content-wrapper {
+  background: hsl(var(--popover)) !important;
+  color: hsl(var(--popover-foreground)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: var(--shadow-md) !important;
+  padding: 0 !important;
+  overflow: hidden;
+  font-family: var(--font-sans) !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+  font-size: 0.8125rem !important;
+}
+
+.leaflet-popup-tip-container {
+  display: none !important; /* Clean floating look without awkward arrow */
+}
+
+.leaflet-popup-close-button {
+  top: 10px !important;
+  right: 10px !important;
+  width: 22px !important;
+  height: 22px !important;
+  line-height: 22px !important;
+  color: hsl(var(--muted-foreground)) !important;
+  border-radius: var(--radius-sm) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 150ms ease !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: hsl(var(--foreground)) !important;
+  background-color: hsl(var(--muted)) !important;
+}
+
+/* Custom Popup Card Layout */
+.map-popup-card {
+  padding: 1rem 1.15rem;
+  min-width: 260px;
+  max-width: 320px;
+}
+
+.map-popup-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+  padding-right: 1rem;
+}
+
+.map-popup-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  line-height: 1.25;
+}
+
+.map-popup-zone {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+  margin-top: 0.15rem;
+}
+
+.map-popup-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  background-color: hsl(var(--muted) / 0.5);
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  padding: 0.5rem 0.65rem;
+  margin: 0.65rem 0;
+}
+
+.map-popup-stat-label {
+  font-size: 0.7rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.map-popup-stat-val {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
+
+.map-popup-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid hsl(var(--border));
+}
+
+/* --- Map Node Markers (Pins) --- */
+.rvm-marker-wrap {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rvm-node-core {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: hsl(var(--card));
+  border: 2px solid hsl(var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  z-index: 2;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  cursor: pointer;
+}
+
+.rvm-marker-wrap:hover .rvm-node-core {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-md);
+}
+
+.rvm-node-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.rvm-marker-wrap.online .rvm-node-core {
+  border-color: hsl(var(--primary));
+}
+.rvm-marker-wrap.online .rvm-node-dot {
+  background-color: hsl(var(--primary));
+}
+
+.rvm-marker-wrap.warning .rvm-node-core {
+  border-color: hsl(var(--warning));
+}
+.rvm-marker-wrap.warning .rvm-node-dot {
+  background-color: hsl(var(--warning));
+}
+
+.rvm-marker-wrap.offline .rvm-node-core {
+  border-color: hsl(var(--destructive));
+  opacity: 0.85;
+}
+.rvm-marker-wrap.offline .rvm-node-dot {
+  background-color: hsl(var(--destructive));
+}
+
+/* Central Server / Campus Hub Marker */
+.rvm-marker-wrap.hub .rvm-node-core {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius);
+  background-color: hsl(var(--card));
+  border: 2px solid hsl(var(--foreground));
+  color: hsl(var(--foreground));
+}
+
+.rvm-marker-wrap.hub svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Pulsing rings for active status */
+.rvm-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  margin-top: -14px;
+  margin-left: -14px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rvm-marker-wrap.online .rvm-pulse-ring {
+  border: 2px solid hsl(var(--primary));
+  animation: rvm-node-pulse 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.rvm-marker-wrap.warning .rvm-pulse-ring {
+  border: 2px solid hsl(var(--warning));
+  animation: rvm-node-pulse 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.rvm-marker-wrap.hub .rvm-pulse-ring {
+  border: 2px solid hsl(var(--foreground));
+  border-radius: var(--radius);
+  animation: rvm-node-pulse 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+@keyframes rvm-node-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rvm-pulse-ring {
+    animation: none !important;
+    display: none !important;
+  }
+  .net-line-pulse {
+    animation: none !important;
+  }
+}
+
+/* --- Floating Map Overlay Toolbar --- */
+.map-toolbar-floating {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  max-width: calc(100% - 2rem);
+}
+
+.map-control-card {
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 0.35rem 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Map Network Legend */
+.map-legend-floating {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1rem;
+  z-index: 1000;
+  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Network Connection Lines */
+.net-line-pulse {
+  stroke-dasharray: 6, 6;
+  animation: net-dash-flow 1.5s linear infinite;
+}
+
+@keyframes net-dash-flow {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Peta Page Grid Layout (Map + Telemetry Sidebar) */
+.grid-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 1080px) {
+  .grid-map-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.telemetry-node-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.telemetry-node-card {
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.telemetry-node-card:hover,
+.telemetry-node-card.selected {
+  border-color: hsl(var(--ring));
+  background-color: hsl(var(--muted) / 0.4);
+}

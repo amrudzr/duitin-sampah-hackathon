@@ -20,9 +20,9 @@
   }
 
   function matBadge(mat, label) {
-    if (mat === 'PET') return `<span class="badge badge-info">Botol PET</span>`;
-    if (mat === 'ALU') return `<span class="badge badge-success">Kaleng Aluminium</span>`;
-    return `<span class="badge badge-outline">${label}</span>`;
+    if (mat === 'PET') return `<span class="text-xs font-medium">Botol PET</span>`;
+    if (mat === 'ALU') return `<span class="text-xs font-medium">Kaleng Alu</span>`;
+    return `<span class="text-xs text-muted">${label}</span>`;
   }
 
   function renderTable() {
@@ -58,25 +58,15 @@
     tbody.innerHTML = filtered.map(tx => `
       <tr class="clickable" data-id="${tx.id}">
         <td style="white-space:nowrap;">
-          <div class="mono font-medium" style="font-size:0.8125rem;">${tx.id}</div>
-          <div class="text-xs text-muted">${tx.timestamp}</div>
+          <span class="mono font-medium">${tx.id}</span>
+          <span class="text-xs text-muted" style="margin-left:0.35rem;">${tx.timestamp.split(', ')[1] || tx.timestamp}</span>
         </td>
+        <td class="font-medium">${tx.user}</td>
         <td>
-          <div class="font-medium">${tx.user}</div>
-          <div class="text-xs text-muted mono">${tx.userNim}</div>
+          <span class="text-xs text-muted">${tx.machineName.replace(' UNS', '')}</span>
         </td>
-        <td>
-          <div class="mono text-xs font-semibold">${tx.machineId}</div>
-          <div class="text-xs text-muted">${tx.machineName.replace(' UNS', '')}</div>
-        </td>
-        <td>
-          <div>${matBadge(tx.material, tx.materialLabel)}</div>
-          <div class="mono text-xs text-muted" style="margin-top:3px;">Confidence: ${tx.aiConfidence}%</div>
-        </td>
-        <td>
-          <div class="mono text-xs font-medium">${tx.weightGram} gram</div>
-          <div class="text-xs text-muted">${tx.sensorCheck}</div>
-        </td>
+        <td>${matBadge(tx.material, tx.materialLabel)}</td>
+        <td class="mono font-medium text-xs">${tx.weightGram} g</td>
         <td>${statusBadge(tx.status, tx.statusLabel)}</td>
         <td class="text-right mono font-semibold">${tx.rewardRp > 0 ? '+' + formatRupiah(tx.rewardRp) : 'Rp0'}</td>
       </tr>
@@ -103,7 +93,7 @@
     document.getElementById('detail-body').innerHTML = `
       <div class="kv-list">
         <div class="kv-row"><span class="kv-key">Akun Pengguna</span><span class="kv-val">${tx.user} (${tx.userNim})</span></div>
-        <div class="kv-row"><span class="kv-key">Idempotency Key</span><span class="kv-val mono text-xs">${tx.idempotencyKey}</span></div>
+        <div class="kv-row"><span class="kv-key">Kode Unik Anti-Duplikasi</span><span class="kv-val mono text-xs">${tx.idempotencyKey}</span></div>
         <div class="kv-row"><span class="kv-key">Wadah Pemilahan</span><span class="kv-val">${tx.sortingBin}</span></div>
         <div class="kv-row"><span class="kv-key">Saldo Ditambahkan</span><span class="kv-val mono font-semibold">${tx.rewardRp > 0 ? '+' + formatRupiah(tx.rewardRp) : 'Rp0'}</span></div>
       </div>

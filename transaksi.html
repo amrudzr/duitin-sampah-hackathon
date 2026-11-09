@@ -24,25 +24,14 @@
           <div>
             <h1 class="page-title">Manajemen Transaksi</h1>
             <p class="page-description">
-              Log audit setiap penyetoran kemasan dengan ID unik, skor klasifikasi AI, hasil sensor berat, dan status konfirmasi pemilahan.
+              Log audit penyetoran kemasan dengan idempotency key, skor AI, sensor beban, dan reward.
             </p>
           </div>
           <div class="page-actions demo-only">
             <button type="button" class="btn btn-primary btn-sm" id="btn-tx-simulate">
               <i data-lucide="plus"></i>
-              <span>Simulasi Transaksi Baru</span>
+              <span>Simulasi Transaksi</span>
             </button>
-          </div>
-        </div>
-
-        <!-- Architectural Guardrail Callout -->
-        <div class="alert alert-info">
-          <i data-lucide="shield-check"></i>
-          <div>
-            <div class="alert-title">Prinsip Verifikasi Sebelum Reward</div>
-            <div class="alert-desc">
-              Saldo virtual hanya ditambahkan setelah backend menerima konfirmasi aktuator pemilah (<code>ACK</code>) dengan <strong>Idempotency Key</strong> unik. Gangguan koneksi ditandai <em>Menunggu Verifikasi</em> agar tidak memicu pemberian saldo ganda atau palsu.
-            </div>
           </div>
         </div>
 
@@ -67,7 +56,7 @@
                   <option value="all">Semua Kategori</option>
                   <option value="PET">Botol Plastik PET</option>
                   <option value="ALU">Kaleng Aluminium</option>
-                  <option value="UNKNOWN">Tidak Dikenali / Non-MVP</option>
+                  <option value="UNKNOWN">Tidak Dikenali / Residu Ditolak</option>
                 </select>
               </div>
 
@@ -80,13 +69,13 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>ID Transaksi &amp; Waktu</th>
+                    <th>ID &amp; Waktu</th>
                     <th>Pengguna</th>
-                    <th>Unit RVM</th>
-                    <th>Klasifikasi AI</th>
-                    <th>Validasi Sensor</th>
+                    <th>Lokasi RVM</th>
+                    <th>Material</th>
+                    <th>Berat</th>
                     <th>Status</th>
-                    <th class="text-right">Reward Virtual</th>
+                    <th class="text-right">Reward</th>
                   </tr>
                 </thead>
                 <tbody id="tx-table-body"></tbody>

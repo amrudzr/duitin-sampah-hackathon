@@ -12,7 +12,7 @@ Dibangun menggunakan **HTML, CSS, dan JavaScript murni (tanpa build step)** deng
 |---|---|---|
 | **Login Operator** | `index.html` | Halaman masuk admin dengan ringkasan 4 pilar *Material Intelligence*. |
 | **Ringkasan Operasional** | `dashboard.html` | KPI utama, grafik tren 14 hari (unit & berat kg), proporsi PET vs Aluminium, transaksi terbaru, dan status unit RVM. |
-| **Monitoring Mesin** | `mesin.html` | Pemantauan perangkat keras ESP32, kamera AI, sensor berat, konektivitas Wi-Fi, dan kapasitas wadah PET/Aluminium terpisah. |
+| **Monitoring Mesin** | `mesin.html` | Pemantauan perangkat keras ESP32, kamera AI, sensor berat, konektivitas Wi-Fi, kapasitas wadah, serta visualisasi sebaran spasial dan topologi jaringan IoT Kampus Kentingan UNS dalam satu menu terpadu. |
 | **Manajemen Transaksi** | `transaksi.html` | Tabel audit transaksi dengan ID unik, *Idempotency Key*, skor klasifikasi CV, berat sensor, serta *slide-over sheet* 5 tahap verifikasi. |
 | **Analitik Material** | `analitik.html` | Akumulasi mingguan PET vs Aluminium, distribusi lokasi kampus UNS, dan rincian penolakan objek multi-modal tanpa klaim emisi yang belum tervalidasi. |
 | **Manajemen Reward** | `reward.html` | Pengaturan nilai saldo virtual per kategori material & kalkulator simulasi margin operasional (§12). |
@@ -21,11 +21,12 @@ Dibangun menggunakan **HTML, CSS, dan JavaScript murni (tanpa build step)** deng
 
 ---
 
-## Fitur Bantu untuk Screenshot Proposal
+## Fitur Prototipe & Presentasi
 
-- **Mode Screenshot** (tombol di kanan atas header): Menyembunyikan lencana *"Data Ilustrasi Prototipe"* dan tombol bantu simulasi dengan satu klik agar tangkapan layar bersih saat dimasukkan ke dokumen proposal.
-- **Mode Terang & Gelap (Light / Dark)**: Tombol bulan/matahari di kanan atas untuk memilih varian visual terang atau gelap sesuai kebutuhan tata letak proposal.
-- **Filter Prototipe MVP vs Jaringan Kampus** (`mesin.html`): Memungkinkan pengambilan screenshot untuk 1 mesin MVP saja (`RVM-UNS-01`) maupun skenario jaringan klaster 4 mesin.
+- **Lencana Ilustrasi Prototipe**: Menampilkan status tahap prototipe di header secara elegan untuk penegasan fase pengembangan UNS Innovation Hackathon 2026.
+- **Mode Terang & Gelap (Light / Dark)**: Tombol di kanan atas header untuk memilih varian tema terang (OpenStreetMap) atau gelap (Esri Dark Canvas) yang adaptif dan bebas watermark.
+- **Tab Kartu & Peta Sebaran** (`mesin.html`): Pilihan tampilan daftar status unit RVM atau visualisasi geografis interaktif tanpa perlu berpindah halaman.
+- **Pemisah Ribuan Otomatis** (`reward.html`): Input kuantitas dan nominal moneter otomatis terformat dengan pemisah ribuan standar Indonesia (`id-ID`) untuk kemudahan keterbacaan data.
 - **Simulasi Transaksi Masuk** (`dashboard.html` & `transaksi.html`): Menambahkan transaksi baru secara langsung untuk mendemonstrasikan alur pencatatan *end-to-end*.
 
 ---
