@@ -20,15 +20,16 @@
       <header class="app-topbar" id="app-topbar"></header>
 
       <main class="page-container">
+        <!-- Page Header -->
         <div class="page-header">
           <div>
-            <h1 class="page-title">Analitik Material &amp; Kinerja Verifikasi</h1>
+            <h1 class="page-title">Analitik Material</h1>
             <p class="page-description">
-              Statistik akumulasi PET dan Aluminium, distribusi pengumpulan per lokasi mesin, serta evaluasi kinerja klasifikasi AI dan sensor fisik.
+              Statistik akumulasi kemasan terpilah, kontribusi lokasi mesin, dan performa filter sensor.
             </p>
           </div>
           <div class="page-actions">
-            <span class="badge badge-outline">Periode: 30 Hari Terakhir</span>
+            <span class="text-xs text-muted">Periode: 30 Hari Terakhir</span>
           </div>
         </div>
 
@@ -40,12 +41,12 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Akumulasi Mingguan per Kategori Material</h2>
-                <p class="card-description">Jumlah unit kemasan yang berhasil dipisahkan ke wadah PET dan Aluminium.</p>
+                <h2 class="card-title">Akumulasi Mingguan</h2>
+                <p class="card-description">Unit kemasan terpilah PET &amp; Aluminium.</p>
               </div>
               <div class="row-gap-sm text-xs">
                 <span class="row-gap-sm"><span class="legend-dot pet"></span> PET</span>
-                <span class="row-gap-sm"><span class="legend-dot alu"></span> Alu</span>
+                <span class="row-gap-sm"><span class="legend-dot alu"></span> Aluminium</span>
               </div>
             </div>
             <div class="card-content">
@@ -58,8 +59,8 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Distribusi Berat Terkumpul per Lokasi RVM (kg)</h2>
-                <p class="card-description">Perbandingan kontribusi material terpilah antar titik penempatan di lingkungan UNS.</p>
+                <h2 class="card-title">Distribusi per Lokasi RVM (kg)</h2>
+                <p class="card-description">Volume material terkumpul di tiap titik kampus.</p>
               </div>
             </div>
             <div class="card-content">
@@ -70,15 +71,14 @@
           </div>
         </section>
 
-        <!-- Multi-Modal Rejection Breakdown + Scientific Note -->
+        <!-- Rejection Breakdown + Material Metrics -->
         <section class="grid-main-aside">
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Rincian Penolakan Objek (Multi-Modal Filtering)</h2>
-                <p class="card-description">Penyebab penolakan 128 objek selama pengujian guna menjaga kualitas material terpilah.</p>
+                <h2 class="card-title">Rincian Penolakan Objek</h2>
+                <p class="card-description">Hasil penyaringan multi-modal untuk mencegah kontaminasi wadah.</p>
               </div>
-              <span class="badge badge-outline">Total 128 Ditolak</span>
             </div>
             <div class="card-content">
               <div class="table-wrap">
@@ -86,47 +86,35 @@
                   <thead>
                     <tr>
                       <th>Kategori Penolakan</th>
-                      <th>Lapisan Pendeteksi</th>
+                      <th>Deteksi</th>
                       <th>Jumlah</th>
-                      <th>Proporsi</th>
+                      <th class="text-right">Proporsi</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>
-                        <div class="font-medium">Botol masih berisi sisa cairan (&gt;45 g)</div>
-                        <div class="text-xs text-muted">Mencegah kontaminasi cairan pada wadah penyimpanan</div>
-                      </td>
-                      <td><span class="badge badge-info">Sensor Berat Load Cell</span></td>
+                      <td class="font-medium">Botol berisi sisa cairan (&gt;45 g)</td>
+                      <td class="text-xs text-muted">Load Cell</td>
                       <td class="mono font-medium">54 unit</td>
-                      <td class="mono">42,2%</td>
+                      <td class="mono text-right">42,2%</td>
                     </tr>
                     <tr>
-                      <td>
-                        <div class="font-medium">Gelas cup plastik PP / kemasan multilayer</div>
-                        <div class="text-xs text-muted">Di luar cakupan penerimaan MVP Tahap 1</div>
-                      </td>
-                      <td><span class="badge badge-success">Computer Vision AI</span></td>
+                      <td class="font-medium">Gelas cup plastik PP / multilayer</td>
+                      <td class="text-xs text-muted">AI Vision</td>
                       <td class="mono font-medium">41 unit</td>
-                      <td class="mono">32,0%</td>
+                      <td class="mono text-right">32,0%</td>
                     </tr>
                     <tr>
-                      <td>
-                        <div class="font-medium">Benda asing (botol kaca / kertas / objek lain)</div>
-                        <div class="text-xs text-muted">Skor confidence rendah &amp; profil berat di luar rentang</div>
-                      </td>
-                      <td><span class="badge badge-outline">Kombinasi CV + Sensor</span></td>
+                      <td class="font-medium">Benda asing (kaca, kertas, karton)</td>
+                      <td class="text-xs text-muted">Sensor + AI</td>
                       <td class="mono font-medium">22 unit</td>
-                      <td class="mono">17,2%</td>
+                      <td class="mono text-right">17,2%</td>
                     </tr>
                     <tr>
-                      <td>
-                        <div class="font-medium">Kemasan terlipat/penyok ekstrem</div>
-                        <div class="text-xs text-muted">Confidence di bawah ambang batas keamanan 75%</div>
-                      </td>
-                      <td><span class="badge badge-success">Computer Vision AI</span></td>
+                      <td class="font-medium">Kemasan penyok ekstrem</td>
+                      <td class="text-xs text-muted">AI Vision</td>
                       <td class="mono font-medium">11 unit</td>
-                      <td class="mono">8,6%</td>
+                      <td class="mono text-right">8,6%</td>
                     </tr>
                   </tbody>
                 </table>
@@ -137,11 +125,11 @@
           <div class="card">
             <div class="card-header">
               <div>
-                <h2 class="card-title">Metodologi Pelaporan Dampak</h2>
-                <p class="card-description">Prinsip transparansi data lingkungan Sirkula.</p>
+                <h2 class="card-title">Ringkasan Validasi</h2>
+                <p class="card-description">Parameter berat fisik terukur.</p>
               </div>
             </div>
-            <div class="card-content stack" style="gap:0.85rem;">
+            <div class="card-content stack" style="gap:0.75rem;">
               <div class="kv-list">
                 <div class="kv-row">
                   <span class="kv-key">Rata-rata Berat Botol PET</span>
@@ -152,22 +140,12 @@
                   <span class="kv-val mono">14,2 g / unit</span>
                 </div>
                 <div class="kv-row">
-                  <span class="kv-key">Material Dialihkan dari Residu</span>
+                  <span class="kv-key">Material Terpilah Bersih</span>
                   <span class="kv-val mono font-semibold" id="analytics-diverted-kg">58,16 kg</span>
                 </div>
                 <div class="kv-row">
-                  <span class="kv-key">Klaim Pengurangan Emisi CO₂</span>
-                  <span class="badge badge-outline">Tidak Diklaim pada MVP</span>
-                </div>
-              </div>
-
-              <div class="alert alert-info">
-                <i data-lucide="file-check-2"></i>
-                <div>
-                  <div class="alert-title">Kepatuhan Klaim Ilmiah</div>
-                  <div class="alert-desc">
-                    Sesuai dokumen rancangan, Sirkula hanya melaporkan <strong>jumlah kemasan</strong> dan <strong>berat terukur</strong> yang benar-benar diverifikasi sensor, tanpa menampilkan estimasi emisi karbon sebelum metodologi LCA tervalidasi.
-                  </div>
+                  <span class="kv-key">Status Metodologi</span>
+                  <span class="text-xs text-muted">Sensor Riil</span>
                 </div>
               </div>
             </div>

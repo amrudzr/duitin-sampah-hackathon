@@ -199,6 +199,12 @@ body.clean-mode .demo-only {
   color: hsl(var(--destructive));
 }
 
+.nav-count-success {
+  background-color: #16a34a;
+  border-color: #15803d;
+  color: #ffffff;
+}
+
 body.sidebar-collapsed .app-sidebar {
   transform: translateX(-100%);
 }

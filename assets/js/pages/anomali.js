@@ -17,19 +17,19 @@
 
     document.getElementById('anomaly-kpis').innerHTML = `
       <div class="card kpi-card">
-        <div class="kpi-top"><span class="kpi-label">Kejadian Perlu Tinjauan</span><span class="kpi-icon"><i data-lucide="shield-alert"></i></span></div>
-        <div class="kpi-value">${openCount} <span class="text-muted" style="font-size:0.9rem;font-weight:500;">insiden</span></div>
-        <div class="kpi-sub"><span>Termasuk timeout koneksi &amp; indikasi stringing</span></div>
+        <div class="kpi-top"><span class="kpi-label">Perlu Tinjauan</span><span class="kpi-icon"><i data-lucide="shield-alert"></i></span></div>
+        <div class="kpi-value">${openCount} <span class="text-muted" style="font-size:0.9rem;font-weight:500;">kejadian</span></div>
+        <div class="kpi-sub"><span>Menunggu verifikasi operator</span></div>
       </div>
       <div class="card kpi-card">
         <div class="kpi-top"><span class="kpi-label">Dimitigasi Otomatis</span><span class="kpi-icon"><i data-lucide="shield-check"></i></span></div>
-        <div class="kpi-value">${autoCount} <span class="text-muted" style="font-size:0.9rem;font-weight:500;">insiden</span></div>
-        <div class="kpi-sub"><span>Ditolak pada level mesin atau Idempotency API</span></div>
+        <div class="kpi-value">${autoCount} <span class="text-muted" style="font-size:0.9rem;font-weight:500;">kejadian</span></div>
+        <div class="kpi-sub"><span class="text-success">Sensor &amp; API filter aktif</span></div>
       </div>
       <div class="card kpi-card">
-        <div class="kpi-top"><span class="kpi-label">Kebocoran Reward Ganda</span><span class="kpi-icon"><i data-lucide="lock"></i></span></div>
-        <div class="kpi-value">Rp0</div>
-        <div class="kpi-sub"><span class="trend-up">0 kasus</span><span>pencairan tanpa konfirmasi pemilahan</span></div>
+        <div class="kpi-top"><span class="kpi-label">Potensi Kerugian Dicegah</span><span class="kpi-icon"><i data-lucide="shield-check"></i></span></div>
+        <div class="kpi-value">Rp 15.400</div>
+        <div class="kpi-sub"><span class="text-success">Semua manipulasi diblokir</span></div>
       </div>
     `;
 
@@ -45,23 +45,22 @@
       return `
         <tr>
           <td>
-            <div class="mono font-semibold text-xs">${a.id}</div>
-            <div class="text-xs text-muted">${a.time}</div>
-            <div class="mono text-xs text-muted">${a.machineId}</div>
+            <span class="mono font-semibold text-xs">${a.id}</span>
+            <div class="text-xs text-muted">${a.time} · ${a.machineId}</div>
           </td>
           <td>${severityBadge(a.severity, a.severityLabel)}</td>
-          <td style="max-width:430px;">
-            <div class="font-semibold">${a.type} <span class="mono text-xs text-muted">(${a.txId})</span></div>
-            <div class="text-xs text-muted" style="margin-top:3px;line-height:1.45;">${a.detail}</div>
+          <td>
+            <div class="font-medium text-sm">${a.type}</div>
+            <div class="text-xs text-muted" style="margin-top:2px;">${a.detail}</div>
           </td>
-          <td><span class="badge badge-info">${a.layer}</span></td>
+          <td><span class="badge badge-outline">${a.layer}</span></td>
           <td>
             <span class="badge ${isOpen ? 'badge-warning' : 'badge-success'}">${a.actionStatus}</span>
           </td>
           <td class="text-right">
             ${isOpen
-              ? `<button type="button" class="btn btn-outline btn-sm btn-resolve" data-id="${a.id}">Tandai Selesai</button>`
-              : `<span class="text-xs text-muted">Terverifikasi</span>`
+              ? `<button type="button" class="btn btn-outline btn-sm btn-resolve" data-id="${a.id}">Selesaikan</button>`
+              : `<span class="text-xs text-muted">Selesai</span>`
             }
           </td>
         </tr>

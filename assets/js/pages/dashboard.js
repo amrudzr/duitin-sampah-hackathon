@@ -44,8 +44,8 @@
         </div>
         <div class="kpi-value">${formatNumber(m.acceptedUnits)} <span style="font-size:0.9rem;font-weight:500;" class="text-muted">unit</span></div>
         <div class="kpi-sub">
-          <span class="trend-up"><i data-lucide="trending-up" style="width:13px;height:13px;"></i> +14,2%</span>
-          <span>(${formatNumber(m.petUnits)} PET · ${formatNumber(m.aluUnits)} Alu)</span>
+          <span class="text-success font-medium">+128 unit</span>
+          <span>hari ini</span>
         </div>
       </div>
 
@@ -56,30 +56,29 @@
         </div>
         <div class="kpi-value">${formatKg(m.totalKg)}</div>
         <div class="kpi-sub">
-          <span>${formatKg(m.petKg)} PET · ${formatKg(m.aluKg)} Aluminium</span>
+          <span>Material bersih tervalidasi</span>
         </div>
       </div>
 
       <div class="card kpi-card">
         <div class="kpi-top">
-          <span class="kpi-label">Saldo Reward Tersalurkan</span>
+          <span class="kpi-label">Saldo Reward Disalurkan</span>
           <span class="kpi-icon"><i data-lucide="wallet"></i></span>
         </div>
         <div class="kpi-value">${formatRupiah(m.totalRewardRp)}</div>
         <div class="kpi-sub">
-          <span class="trend-up">100%</span>
-          <span>terkonfirmasi aktuator pemilah</span>
+          <span>1.130 klaim berhasil</span>
         </div>
       </div>
 
       <div class="card kpi-card">
         <div class="kpi-top">
-          <span class="kpi-label">Tingkat Penerimaan Valid</span>
+          <span class="kpi-label">Tingkat Penerimaan</span>
           <span class="kpi-icon"><i data-lucide="cpu"></i></span>
         </div>
         <div class="kpi-value">${m.acceptanceRatePct.replace('.', ',')}%</div>
         <div class="kpi-sub">
-          <span>${formatNumber(m.rejectedUnits)} ditolak sensor/CV · ${m.pendingUnits} tertunda</span>
+          <span>${formatNumber(m.rejectedUnits)} unit ditolak</span>
         </div>
       </div>
     `;
@@ -170,16 +169,12 @@
       const aluPct = ((m.aluUnits / m.acceptedUnits) * 100).toFixed(1).replace('.', ',');
       summaryEl.innerHTML = `
         <div class="kv-row">
-          <span class="row-gap-sm" style="white-space:nowrap;"><span class="legend-dot pet"></span> Botol PET (${petPct}%)</span>
-          <span class="kv-val mono" style="white-space:nowrap;">${formatNumber(m.petUnits)} unit · ${formatKg(m.petKg)}</span>
+          <span class="row-gap-sm"><span class="legend-dot pet"></span> Botol PET (${petPct}%)</span>
+          <span class="kv-val mono">${formatNumber(m.petUnits)} unit</span>
         </div>
         <div class="kv-row">
-          <span class="row-gap-sm" style="white-space:nowrap;"><span class="legend-dot alu"></span> Aluminium (${aluPct}%)</span>
-          <span class="kv-val mono" style="white-space:nowrap;">${formatNumber(m.aluUnits)} unit · ${formatKg(m.aluKg)}</span>
-        </div>
-        <div class="kv-row">
-          <span class="kv-key" style="white-space:nowrap;">Terpilah Bersih</span>
-          <span class="kv-val mono" style="white-space:nowrap;">${formatKg(m.totalKg)} total</span>
+          <span class="row-gap-sm"><span class="legend-dot alu"></span> Aluminium (${aluPct}%)</span>
+          <span class="kv-val mono">${formatNumber(m.aluUnits)} unit</span>
         </div>
       `;
     }
@@ -189,25 +184,18 @@
     const tbody = document.getElementById('recent-tx-tbody');
     if (!tbody) return;
 
-    const recent = getTransactions().slice(0, 6);
+    const recent = getTransactions().slice(0, 5);
     tbody.innerHTML = recent.map(tx => `
       <tr class="clickable" data-tx-id="${tx.id}">
         <td>
-          <div class="mono font-medium" style="font-size:0.8rem;">${tx.id}</div>
-          <div class="text-xs text-muted">${tx.timestamp.split(', ')[1] || tx.timestamp}</div>
+          <span class="mono font-medium">${tx.id}</span>
+          <span class="text-xs text-muted" style="margin-left:0.35rem;">${tx.timestamp.split(', ')[1] || ''}</span>
         </td>
+        <td class="font-medium">${tx.user}</td>
         <td>
-          <div class="font-medium">${tx.user}</div>
-          <div class="text-xs text-muted mono">${tx.userNim}</div>
+          <span class="text-xs text-muted">${tx.machineName.replace(' UNS', '')}</span>
         </td>
-        <td>
-          <div class="row-gap-sm">${materialBadgeHtml(tx.material, tx.materialLabel)}</div>
-          <div class="text-xs text-muted" style="margin-top:2px;">${tx.machineId} · ${tx.machineName.replace(' UNS', '')}</div>
-        </td>
-        <td>
-          <div class="mono text-xs">CV: <strong>${tx.aiConfidence}%</strong></div>
-          <div class="mono text-xs text-muted">${tx.weightGram} g</div>
-        </td>
+        <td>${materialBadgeHtml(tx.material, tx.materialLabel)}</td>
         <td>${statusBadgeHtml(tx.status, tx.statusLabel)}</td>
         <td class="text-right mono font-semibold">${tx.rewardRp > 0 ? '+' + formatRupiah(tx.rewardRp) : 'Rp0'}</td>
       </tr>
@@ -223,43 +211,26 @@
     if (!container) return;
 
     container.innerHTML = MACHINES.map(m => {
-      const petPct = Math.round((m.petCount / m.petCap) * 100);
-      const aluPct = Math.round((m.aluCount / m.aluCap) * 100);
+      const totalCount = m.petCount + m.aluCount;
+      const totalCap = m.petCap + m.aluCap;
+      const totalPct = Math.round((totalCount / totalCap) * 100);
       let badgeClass = 'badge-success';
       if (m.status === 'warning') badgeClass = 'badge-warning';
       if (m.status === 'offline') badgeClass = 'badge-destructive';
 
       return `
-        <div style="padding:0.75rem;border:1px solid hsl(var(--border));border-radius:var(--radius);">
-          <div class="row-between" style="margin-bottom:0.45rem;">
-            <div>
-              <div class="row-gap-sm">
-                <span class="font-semibold text-sm">${m.name}</span>
-                ${m.isMvp ? `<span class="badge badge-outline" style="font-size:0.65rem;padding:0.04rem 0.38rem;">MVP</span>` : ''}
-              </div>
-              <div class="text-xs text-muted mono">${m.id} · Sinkron: ${m.lastSync}</div>
-            </div>
+        <div style="padding:0.65rem 0.8rem;border:1px solid hsl(var(--border));border-radius:var(--radius);background:hsl(var(--card));">
+          <div class="row-between">
+            <span class="font-medium text-sm">${m.name}</span>
             <span class="badge ${badgeClass}"><span class="badge-dot"></span>${m.statusLabel}</span>
           </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.65rem;margin-top:0.5rem;">
-            <div>
-              <div class="row-between text-xs" style="margin-bottom:3px;">
-                <span class="text-muted">Wadah PET</span>
-                <span class="mono font-medium">${petPct}%</span>
-              </div>
-              <div class="progress">
-                <div class="progress-bar ${petPct >= 85 ? 'warn' : 'pet'}" style="width:${petPct}%"></div>
-              </div>
+          <div style="margin-top:0.45rem;">
+            <div class="row-between text-xs mono text-muted" style="margin-bottom:3px;">
+              <span>Kapasitas: ${totalPct}%</span>
+              <span>${totalCount}/${totalCap} unit</span>
             </div>
-            <div>
-              <div class="row-between text-xs" style="margin-bottom:3px;">
-                <span class="text-muted">Wadah Alu</span>
-                <span class="mono font-medium">${aluPct}%</span>
-              </div>
-              <div class="progress">
-                <div class="progress-bar ${aluPct >= 85 ? 'warn' : 'alu'}" style="width:${aluPct}%"></div>
-              </div>
+            <div class="progress">
+              <div class="progress-bar ${totalPct >= 80 ? 'warn' : 'primary'}" style="width:${totalPct}%"></div>
             </div>
           </div>
         </div>

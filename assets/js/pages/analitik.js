@@ -12,12 +12,12 @@
     <div class="card kpi-card">
       <div class="kpi-top"><span class="kpi-label">Akumulasi Botol PET</span><span class="kpi-icon"><i data-lucide="droplets"></i></span></div>
       <div class="kpi-value">${formatKg(m.petKg)}</div>
-      <div class="kpi-sub"><span>${formatNumber(m.petUnits)} botol diterima · 65,1% unit</span></div>
+      <div class="kpi-sub"><span>${formatNumber(m.petUnits)} botol terverifikasi</span></div>
     </div>
     <div class="card kpi-card">
       <div class="kpi-top"><span class="kpi-label">Akumulasi Kaleng Aluminium</span><span class="kpi-icon"><i data-lucide="cylinder"></i></span></div>
       <div class="kpi-value">${formatKg(m.aluKg)}</div>
-      <div class="kpi-sub"><span>${formatNumber(m.aluUnits)} kaleng diterima · 34,9% unit</span></div>
+      <div class="kpi-sub"><span>${formatNumber(m.aluUnits)} kaleng terverifikasi</span></div>
     </div>
     <div class="card kpi-card">
       <div class="kpi-top"><span class="kpi-label">Akurasi Uji Klasifikasi CV</span><span class="kpi-icon"><i data-lucide="scan-eye"></i></span></div>
@@ -63,7 +63,7 @@
   window.SirkulaCharts.createThemedChart('chart-location-dist', (p) => ({
     type: 'bar',
     data: {
-      labels: ['Perpustakaan Pusat (MVP)', 'Gedung B FMIPA', 'Kantin Fak. Teknik', 'Student Center'],
+      labels: ['Perpustakaan Pusat', 'Gedung B FMIPA', 'Kantin Fak. Teknik', 'Student Center'],
       datasets: [
         {
           label: 'Botol PET (kg)',

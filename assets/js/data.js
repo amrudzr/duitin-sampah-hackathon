@@ -12,11 +12,28 @@
     ANOMALIES: 'sirkula_anomalies_v1'
   };
 
+  const CENTRAL_HUB = {
+    id: 'HUB-UNS-HQ',
+    name: 'Pusat Kendali Sirkula & Server IoT',
+    zone: 'Gedung Rektorat dr. Prakosa UNS',
+    lat: -7.55872,
+    lng: 110.85625,
+    ip: '10.200.0.1',
+    status: 'online',
+    statusLabel: 'Pusat Aktif',
+    role: 'Central Ingestion Gateway & Broker'
+  };
+
   const MACHINES = [
     {
       id: 'RVM-UNS-01',
       name: 'Perpustakaan Pusat UNS',
       zone: 'Kampus Kentingan · Lantai 1 Lobby',
+      lat: -7.55835,
+      lng: 110.85602,
+      ip: '192.168.10.21',
+      latencyMs: 14,
+      packetLoss: '0%',
       tier: 'Prototipe MVP',
       isMvp: true,
       status: 'online',
@@ -40,6 +57,11 @@
       id: 'RVM-UNS-02',
       name: 'Gedung B FMIPA UNS',
       zone: 'Kampus Kentingan · Koridor Utama',
+      lat: -7.55985,
+      lng: 110.85420,
+      ip: '192.168.10.22',
+      latencyMs: 22,
+      packetLoss: '0%',
       tier: 'Simulasi Jaringan',
       isMvp: false,
       status: 'warning',
@@ -63,6 +85,11 @@
       id: 'RVM-UNS-03',
       name: 'Kantin Fakultas Teknik UNS',
       zone: 'Kampus Kentingan · Area Kantin',
+      lat: -7.56205,
+      lng: 110.85805,
+      ip: '192.168.10.23',
+      latencyMs: 19,
+      packetLoss: '0%',
       tier: 'Simulasi Jaringan',
       isMvp: false,
       status: 'online',
@@ -86,6 +113,11 @@
       id: 'RVM-UNS-04',
       name: 'Student Center UNS',
       zone: 'Kampus Kentingan · Plaza Barat',
+      lat: -7.55648,
+      lng: 110.85478,
+      ip: '192.168.10.24',
+      latencyMs: null,
+      packetLoss: '100%',
       tier: 'Simulasi Jaringan',
       isMvp: false,
       status: 'offline',
@@ -709,6 +741,7 @@
 
   window.SirkulaData = {
     STORAGE_KEYS,
+    CENTRAL_HUB,
     MACHINES,
     DAILY_TREND_14D,
     COLLECTION_BATCHES,
